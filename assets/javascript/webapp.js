@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+
+//function to call the Edamam api, can add more parameters to improve and specify the query
 function callEdamam(query){
   var queryURL = "https://api.edamam.com/search?";
 
@@ -16,9 +18,13 @@ function callEdamam(query){
     method: "GET"
   }).then(function(response){
     console.log(response);
+    response.hits.forEach(function(hit){
+      console.log(hit.recipe.ingredientLines);
+    });
   })   
 }
 
+//test callEdamam function
 callEdamam("chicken");
 
 
