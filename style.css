@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    
+}
+
+body {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.row1, .row2, .row3, .row5 {
+    border-width: 1px;
+    border-style: solid;
+}
+
+.recipeCol {
+    float: left;
+}
+
+.shopCol {
+    float: right;
+}
+
+.recipeCol, .shopCol {
+    width: 50%;
+    border-width: 1px;
+    border-style: solid;
+}
