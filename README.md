@@ -17,7 +17,7 @@ Project Description:
 
 Sketch of Design:
 
-![alt text](Desktop/BCS/Project-1/wireframe.png)
+![alt text](https://imgur.com/FDU1l6l)
 
 
 APIs & libraries to be used:
