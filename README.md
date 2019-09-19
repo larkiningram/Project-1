@@ -40,17 +40,17 @@ Feature List:
 
 Rough breakdown of tasks:
   - Bailey:
-   - HTML organization
-   - CSS styling
+    - HTML organization
+    - CSS styling
   - Larkin:
-   - HTML Wireframe
-   - Filtering recipes
+    - HTML Wireframe
+    - Filtering recipes
   - Sager:
-   - Nutrition graphs
-   - CSS styling
+    - Nutrition graphs
+    - CSS styling
   - Race:
-   - API configuration
-     - Recipe generation
-     - Postmates information
-   - Recipe information display
+    - API configuration
+      - Recipe generation
+      - Postmates information
+    - Recipe information display
 
