@@ -17,7 +17,7 @@ Project Description:
 
 Sketch of Design:
 
-![alt text](https://imgur.com/FDU1l6l)
+![alt text](https://i.imgur.com/FDU1l6l.jpg)
 
 
 APIs & libraries to be used:
