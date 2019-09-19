@@ -53,4 +53,3 @@ Rough breakdown of tasks:
       - Recipe generation
       - Postmates information
     - Recipe information display
-
