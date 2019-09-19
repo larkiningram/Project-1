@@ -17,14 +17,14 @@ Project Description:
 
 Sketch of Design:
 
-![alt text](Desktop/BCS/Project-1/wireframe.png)
+![alt text](https://i.imgur.com/FDU1l6l.jpg)
 
 
 APIs & libraries to be used:
-	API’s:
+- API’s:
   - Recipe API
   - Postmates
-	Libraries:
+- Libraries:
   - Chart.js (CDN)
 
 Feature List:
@@ -40,17 +40,16 @@ Feature List:
 
 Rough breakdown of tasks:
   - Bailey:
-   - [ ] HTML organization
-   - [ ] CSS styling
+    - HTML organization
+    - CSS styling
   - Larkin:
-   - [ ] HTML Wireframe
-   - [ ] Filtering recipes
+    - HTML Wireframe
+    - Filtering recipes
   - Sager:
-   - [ ] Nutrition graphs
-   - [ ] CSS styling
+    - Nutrition graphs
+    - CSS styling
   - Race:
-   - [ ] API configuration
-     - Recipe generation
-     - Postmates information
-   - [ ] Recipe information display
-
+    - API configuration
+      - Recipe generation
+      - Postmates information
+    - Recipe information display
