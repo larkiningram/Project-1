@@ -21,10 +21,10 @@ Sketch of Design:
 
 
 APIs & libraries to be used:
-	API’s:
+- API’s:
   - Recipe API
   - Postmates
-	Libraries:
+- Libraries:
   - Chart.js (CDN)
 
 Feature List:
@@ -40,17 +40,17 @@ Feature List:
 
 Rough breakdown of tasks:
   - Bailey:
-   - [ ] HTML organization
-   - [ ] CSS styling
+   - HTML organization
+   - CSS styling
   - Larkin:
-   - [ ] HTML Wireframe
-   - [ ] Filtering recipes
+   - HTML Wireframe
+   - Filtering recipes
   - Sager:
-   - [ ] Nutrition graphs
-   - [ ] CSS styling
+   - Nutrition graphs
+   - CSS styling
   - Race:
-   - [ ] API configuration
+   - API configuration
      - Recipe generation
      - Postmates information
-   - [ ] Recipe information display
+   - Recipe information display
 
