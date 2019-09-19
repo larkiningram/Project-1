@@ -8,7 +8,7 @@ body {
     margin: 0 auto;
 }
 
-.row1, .row2, .row3, .row5 {
+.row1, .row2, .row3, .row5, .buttons {
     border-width: 1px;
     border-style: solid;
 }
