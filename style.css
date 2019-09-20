@@ -3,15 +3,36 @@
 }
 
 body {
+    width: 90%;
     text-align: center;
     margin: 0 auto;
-    background: rgb(246, 246, 234);
+
+    background-image: url("assets/siteBG.jpg");
 }
 
-/* .row1, .row2, .row3, .row5, .buttons {
+.row1, .row2, .row3, .row5, .buttons {
     border-width: 1px;
     border-style: solid;
-} */
+
+    background: rgba(213, 255, 234, 0.65);
+}
+
+.row2 {
+    height: 150px;
+}
+
+.row3 {
+    height: 250px;
+}
+
+.buttons { 
+    height: 50px;
+}
+
+.recipeCol, .shopCol {
+    height: 500px;
+}
+
 
 .recipeCol {
     float: left;
