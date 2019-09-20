@@ -85,6 +85,28 @@ $("#clear").on("click", function () {
   $(".amazonLinks").empty();
 });
 
+function callBing(query) {
+
+  console.log(query);
+
+  var q = query
+
+  queryURL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + q + "&count=10"
+
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+    beforeSend: function (request) {
+      request.setRequestHeader("Ocp-Apim-Subscription-Key", "6e2cfe4724284d8fb174832d96aec26a")
+    }
+  }).then(function (response) {
+    console.log(response);
+  })
+
+}
+
+callBing('cheeseburger');
+
 // function suggestions() {
 
 //   for (i in foodTypes) {
@@ -117,4 +139,9 @@ $("#clear").on("click", function () {
 //   }
 //   console.log(amazonURL);
 
+
+
+
+
 // };
+//bcf2f865ecb15e58d0d9622617c02b63f872a838
