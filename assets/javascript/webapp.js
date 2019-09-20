@@ -1,6 +1,7 @@
 // $(document).ready(function () {
 var recipeNames = [];
 var recipeLines = [];
+var measurement = ["/", "grams", "gram", "teaspoons", "tsp", "tbsp", "teaspoon", "tablespoons", "tablespoon", "cups", "cup", "pounds", "pound", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 //function to call the Edamam api, can add more parameters to improve and specify the query
 function callEdamam(query) {
@@ -32,12 +33,39 @@ function callEdamam(query) {
 
     // console.log(recipeNames[showIndex]);
     // console.log(recipeLines[showIndex]);
-    $(".recipeCol").append("<strong>" + recipeNames[showIndex] + "</strong><br></br>");
-    for (i in recipeLines) {
-      $(".recipeCol").append(recipeLines[showIndex][i] + "<br></br>");
-    }
-    return recipeLines;
+    var recipeName = recipeNames[showIndex];
+    var recipeLine = recipeLines[showIndex];
+    $(".recipeCol").append("<strong>" + recipeName + "</strong><br></br>");
+    for (i in recipeLine) {
+      $(".recipeCol").append(recipeLine[i] + "<br></br>");
+    };
+
+    amazon(recipeLine);
+
   })
+
+};
+
+function amazon(lines) {
+  $(".shopCol").html("");
+
+  var amazonURL;
+
+  for (i in lines) {
+    var txt = lines[i];
+    var ingredient = lines[i].split(" ").join("+");
+    for (j in measurement) {
+      ingredient = ingredient.replace(measurement[j], "");
+    }
+    amazonURL = "https://www.amazon.com/s?k=" + ingredient;
+
+    // var link = txt.link(amazonURL);
+
+    var link = ("<a href='" + amazonURL + "' target='_blank'>" + txt + "</a>");
+
+    $(".shopCol").append(link + "<br></br>");
+  }
+  console.log(amazonURL);
 
 };
 
@@ -68,14 +96,7 @@ $("button").on("click", function (event) {
 
 // };
 
-// function amazon() {
 
-//   var ingredient = $("#search").val();
-//   var amazonURL = "https://www.amazon.com/s?k=" + ingredient;
-
-//   console.log(amazonURL);
-
-// };
 
 
 // function callEdamam(query) {
