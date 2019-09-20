@@ -8,10 +8,10 @@ body {
     background: rgb(246, 246, 234);
 }
 
-.row1, .row2, .row3, .row5, .buttons {
+/* .row1, .row2, .row3, .row5, .buttons {
     border-width: 1px;
     border-style: solid;
-}
+} */
 
 .recipeCol {
     float: left;
@@ -23,6 +23,6 @@ body {
 
 .recipeCol, .shopCol {
     width: 50%;
-    border-width: 1px;
-    border-style: solid;
+    /* border-width: 1px;
+    border-style: solid; */
 }
