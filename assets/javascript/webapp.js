@@ -40,40 +40,35 @@ function callEdamam(query) {
       $(".recipeCol").append(recipeLine[i] + "<br></br>");
     };
 
-    amazon(recipeLine);
+    // amazon(recipeLine);
 
   })
 
 };
 
-function amazon(lines) {
-  $(".shopCol").html("");
 
-  var amazonURL;
+$("#later").on("click", function (event) {
+  event.preventDefault();
 
-  for (i in lines) {
-    var txt = lines[i];
-    var ingredient = lines[i].split(" ").join("+");
-    for (j in measurement) {
-      ingredient = ingredient.replace(measurement[j], "");
-    }
-    amazonURL = "https://www.amazon.com/s?k=" + ingredient;
+  // $(".shopCol").html("");
 
-    // var link = txt.link(amazonURL);
+  var ingredient = $("#ingredient").val();
+  var ingredientLink = ingredient.split(" ").join("+");
+  var amazonURL = "https://www.amazon.com/s?k=" + ingredientLink;
 
-    var link = ("<a href='" + amazonURL + "' target='_blank'>" + txt + "</a>");
+  var link = ("<a href='" + amazonURL + "' target='_blank'>" + ingredient + "</a>");
 
-    $(".shopCol").append(link + "<br></br>");
-  }
-  console.log(amazonURL);
+  $(".amazonLinks").append(link + "<br></br>");
 
-};
+  $("#ingredient").val("");
+});
 
 
 //test callEdamam function
 
-$("button").on("click", function (event) {
+$("#initial").on("click", function (event) {
   $(".recipeCol").html("");
+
   var ingredient = $("#search").val();
 
   event.preventDefault();
@@ -84,6 +79,10 @@ $("button").on("click", function (event) {
 
   $("#search").val("");
 
+});
+
+$("#clear").on("click", function () {
+  $(".amazonLinks").empty();
 });
 
 // function suggestions() {
@@ -97,29 +96,25 @@ $("button").on("click", function (event) {
 // };
 
 
+// function amazon(lines) {
+//   $(".shopCol").html("");
 
+//   var amazonURL;
 
-// function callEdamam(query) {
-//   var queryURL = "https://api.edamam.com/search?";
+//   for (i in lines) {
+//     var txt = lines[i];
+//     var ingredient = lines[i].split(" ").join("+");
+//     for (j in measurement) {
+//       ingredient = ingredient.replace(measurement[j], "");
+//     }
+//     amazonURL = "https://www.amazon.com/s?k=" + ingredient;
 
-//   var q = query;
+//     // var link = txt.link(amazonURL);
 
-//   var apiId = "app_id=6b37a04b";
+//     var link = ("<a href='" + amazonURL + "' target='_blank'>" + txt + "</a>");
 
-//   var apiKey = "app_key=59ee4eaaea79bef6ea234639a9c48a1a";
+//     $(".shopCol").append(link + "<br></br>");
+//   }
+//   console.log(amazonURL);
 
-//   queryURL = queryURL + "q=" + q + "&" + apiId + "&" + apiKey;
-
-//   $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//   }).then(function (response) {
-//     // console.log(response);
-//     response.hits.forEach(function (hit) {
-//       // console.log(hit.recipe.label);
-//       $(".recipeCol").append(hit.recipe.ingredientLines + "<br></br>");
-
-//     });
-//   })
 // };
-
