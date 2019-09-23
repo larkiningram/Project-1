@@ -1,7 +1,6 @@
 // $(document).ready(function () {
 var recipeNames = [];
 var recipeLines = [];
-var measurement = ["/", "grams", "gram", "teaspoons", "tsp", "tbsp", "teaspoon", "tablespoons", "tablespoon", "cups", "cup", "pounds", "pound", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 var recipeFilters = [{ param: "&health=peanut-free", check: false }, {param: "&health=vegetarian", check: false}, {param: "&health=sugar-conscious", check: false}, {param: "&health=tree-nut-free", check: false}, {param: "&diet=low-fat", check: false}, {param: "&diet=high-protein", check: false}, {param: "&health=vegan", check: false}];
 
 
@@ -17,6 +16,9 @@ function callEdamam(query) {
 
   queryURL = queryURL + "q=" + q + "&" + apiId + "&" + apiKey;
 
+  recipeLines = [];
+  recipeNames = [];
+  
   for(var i = 0; i < recipeFilters.length; i++){
     if(recipeFilters[i].check === true){
       queryURL = queryURL + recipeFilters[i].param;
