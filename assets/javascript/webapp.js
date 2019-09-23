@@ -3,6 +3,14 @@ var recipeNames = [];
 var recipeLines = [];
 var recipeFilters = [{ param: "&health=peanut-free", check: false }, {param: "&health=vegetarian", check: false}, {param: "&health=sugar-conscious", check: false}, {param: "&health=tree-nut-free", check: false}, {param: "&diet=low-fat", check: false}, {param: "&diet=high-protein", check: false}, {param: "&health=vegan", check: false}];
 
+// nut variables
+var protien = 0;
+var carbs = 0;
+var fat = 0;
+// nut recommended variables
+const recProtien = 196;
+const recCarbs = 147;
+const recFat = 65;
 
 //function to call the Edamam api, can add more parameters to improve and specify the query
 function callEdamam(query) {
@@ -40,6 +48,13 @@ function callEdamam(query) {
 
     var showIndex = Math.floor(Math.random() * (recipeNames.length - 1));
 
+
+    // set variables for nut values
+    var nutrients = response.hits[showIndex].recipe.totalNutrients;
+    protien = (nutrients.PROCNT.quantity).toFixed(2);
+    carbs = (nutrients.CHOCDF.quantity).toFixed(2);
+    fat = (nutrients.FAT.quantity).toFixed(2);
+
     var recipeName = recipeNames[showIndex];
     var recipeLine = recipeLines[showIndex];
 
@@ -52,6 +67,9 @@ function callEdamam(query) {
     for (i in recipeLine) {
       $(".ingredients").append(recipeLine[i] + "<br></br>");
     };
+
+    renderCharts();
+    // amazon(recipeLine);
 
   })
 };
@@ -224,6 +242,77 @@ function callBingIngredients(query) {
       $(".imgContainer").html($("<img src='" + recipeImage + "' height='200px'>"));
     }
   })
+
 };
+ 
+function renderCharts() {
+  // bar chart
+  var barctx = $("#barChart");
+  var myBarChart = new Chart(barctx, {
+    type: 'bar',
+    data: {
+      labels: ['Protiens', 'Carbs', 'Fats'],
+      datasets: [{
+        data: [protien, carbs, fat],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
+// function suggestions() {
+
+//   for (i in foodTypes) {
+
+//     var link = $('<a href="#" class="type ' + foodTypes[i] + 'Topic">' + foodTypes[i] + '</a><br>')
+//     $("#suggestions").append(link);
+//   }
+
+// };
+
+
+
+// function amazon(lines) {
+//   $(".shopCol").html("");
+
+//   var amazonURL;
+
+//   for (i in lines) {
+//     var txt = lines[i];
+//     var ingredient = lines[i].split(" ").join("+");
+//     for (j in measurement) {
+//       ingredient = ingredient.replace(measurement[j], "");
+//     }
+//     amazonURL = "https://www.amazon.com/s?k=" + ingredient;
+
+//     // var link = txt.link(amazonURL);
+
+//     var link = ("<a href='" + amazonURL + "' target='_blank'>" + txt + "</a>");
+
+//     $(".shopCol").append(link + "<br></br>");
+//   }
+//   console.log(amazonURL);
 
 //bcf2f865ecb15e58d0d9622617c02b63f872a838
