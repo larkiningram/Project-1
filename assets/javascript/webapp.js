@@ -1,7 +1,6 @@
 // $(document).ready(function () {
 var recipeNames = [];
 var recipeLines = [];
-var measurement = ["/", "grams", "gram", "teaspoons", "tsp", "tbsp", "teaspoon", "tablespoons", "tablespoon", "cups", "cup", "pounds", "pound", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 var recipeFilters = [{ param: "&health=peanut-free", check: false }, {param: "&health=vegetarian", check: false}, {param: "&health=sugar-conscious", check: false}, {param: "&health=tree-nut-free", check: false}, {param: "&diet=low-fat", check: false}, {param: "&diet=high-protein", check: false}, {param: "&health=vegan", check: false}];
 
 // nut variables
@@ -25,6 +24,9 @@ function callEdamam(query) {
 
   queryURL = queryURL + "q=" + q + "&" + apiId + "&" + apiKey;
 
+  recipeLines = [];
+  recipeNames = [];
+  
   for(var i = 0; i < recipeFilters.length; i++){
     if(recipeFilters[i].check === true){
       queryURL = queryURL + recipeFilters[i].param;
@@ -43,11 +45,9 @@ function callEdamam(query) {
       recipeNames.push(hits[i].recipe.label);
       recipeLines.push(hits[i].recipe.ingredientLines);
     }
-    // console.log(recipeNames);
-    // console.log(recipeLines);
-
 
     var showIndex = Math.floor(Math.random() * (recipeNames.length - 1));
+
 
     // set variables for nut values
     var nutrients = response.hits[showIndex].recipe.totalNutrients;
@@ -55,22 +55,23 @@ function callEdamam(query) {
     carbs = (nutrients.CHOCDF.quantity).toFixed(2);
     fat = (nutrients.FAT.quantity).toFixed(2);
 
-    // console.log(recipeNames[showIndex]);
-    // console.log(recipeLines[showIndex]);
     var recipeName = recipeNames[showIndex];
     var recipeLine = recipeLines[showIndex];
+
+    console.log(recipeName);
+    console.log(recipeLine);
+
     callBing(recipeName);
 
-    $(".recipeCol").append("<strong>" + recipeName + "</strong><br></br>");
+    $(".name").append("<strong>" + recipeName + "</strong><br></br>");
     for (i in recipeLine) {
-      $(".recipeCol").append(recipeLine[i] + "<br></br>");
+      $(".ingredients").append(recipeLine[i] + "<br></br>");
     };
 
     renderCharts();
     // amazon(recipeLine);
 
   })
-
 };
 
 $(".peanut-check").on('click', function(){
@@ -146,8 +147,6 @@ $(".vegan-check").on('click', function () {
 $("#later").on("click", function (event) {
   event.preventDefault();
 
-  // $(".shopCol").html("");
-
   var ingredient = $("#ingredient").val();
   var ingredientLink = ingredient.split(" ").join("+");
   var amazonURL = "https://www.amazon.com/s?k=" + ingredientLink;
@@ -166,13 +165,13 @@ $("#later").on("click", function (event) {
 //test callEdamam function
 
 $("#initial").on("click", function (event) {
-  $(".recipeCol").html("");
+  $(".name").html("");
+  $(".ingredients").html("");
+  $(".recipeCol h3").html("");
 
   var ingredient = $("#search").val();
 
   event.preventDefault();
-
-  // console.log("hi");
 
   callEdamam(ingredient);
 
@@ -208,15 +207,17 @@ function callBing(query) {
     console.log(response.value[0].contentUrl);
     var recipeImage = response.value[0].contentUrl;
 
-    if(recipeImage !== undefined){
-      $(".recipeCol").append($("<img src='" + recipeImage + "'>"));
-    } else{
+    if (recipeImage !== undefined) {
+      $(".name").append($("<img src='" + recipeImage + "' height='200px'>"));
+    } else {
       console.log(response.value[0].contentUrl);
+      alert("Try another query!");
     }
     // need to decide on an action for undefined
   })
 
-}
+};
+
 // Bing API - ingredients  //my variables to work on
 function callBingIngredients(query) {
 
@@ -237,11 +238,12 @@ function callBingIngredients(query) {
     console.log(response.value[0].contentUrl);
     var recipeImage = response.value[0].contentUrl;
 
-    if(recipeImage !== undefined){
-      $(".imgContainer").append($("<img src='" + recipeImage + "'>"));
+    if (recipeImage !== undefined) {
+      $(".imgContainer").html($("<img src='" + recipeImage + "' height='200px'>"));
     }
   })
-}
+
+};
  
 function renderCharts() {
   // bar chart
@@ -313,9 +315,4 @@ function renderCharts() {
 //   }
 //   console.log(amazonURL);
 
-
-
-
-
-// };
 //bcf2f865ecb15e58d0d9622617c02b63f872a838
