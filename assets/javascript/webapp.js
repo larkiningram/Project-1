@@ -3,6 +3,7 @@ var recipeNames = [];
 var recipeLines = [];
 var measurement = ["/", "grams", "gram", "teaspoons", "tsp", "tbsp", "teaspoon", "tablespoons", "tablespoon", "cups", "cup", "pounds", "pound", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
+
 //function to call the Edamam api, can add more parameters to improve and specify the query
 function callEdamam(query) {
   var queryURL = "https://api.edamam.com/search?";
@@ -25,8 +26,8 @@ function callEdamam(query) {
       recipeNames.push(hits[i].recipe.label);
       recipeLines.push(hits[i].recipe.ingredientLines);
     }
-    console.log(recipeNames);
-    console.log(recipeLines);
+    // console.log(recipeNames);
+    // console.log(recipeLines);
 
 
     var showIndex = Math.floor(Math.random() * (recipeNames.length - 1));
@@ -35,6 +36,8 @@ function callEdamam(query) {
     // console.log(recipeLines[showIndex]);
     var recipeName = recipeNames[showIndex];
     var recipeLine = recipeLines[showIndex];
+    callBing(recipeName);
+
     $(".recipeCol").append("<strong>" + recipeName + "</strong><br></br>");
     for (i in recipeLine) {
       $(".recipeCol").append(recipeLine[i] + "<br></br>");
@@ -55,6 +58,7 @@ $("#later").on("click", function (event) {
   var ingredient = $("#ingredient").val();
   var ingredientLink = ingredient.split(" ").join("+");
   var amazonURL = "https://www.amazon.com/s?k=" + ingredientLink;
+  callBingIngredients(ingredient);
 
   var link = ("<a href='" + amazonURL + "' target='_blank'>" + ingredient + "</a>");
 
@@ -73,7 +77,7 @@ $("#initial").on("click", function (event) {
 
   event.preventDefault();
 
-  console.log("hi");
+  // console.log("hi");
 
   callEdamam(ingredient);
 
@@ -83,8 +87,13 @@ $("#initial").on("click", function (event) {
 
 $("#clear").on("click", function () {
   $(".amazonLinks").empty();
+  $(".imgContainer").empty();
 });
 
+
+
+
+// Bing API - recipe image  //my variables to work on
 function callBing(query) {
 
   console.log(query);
@@ -100,12 +109,46 @@ function callBing(query) {
       request.setRequestHeader("Ocp-Apim-Subscription-Key", "6e2cfe4724284d8fb174832d96aec26a")
     }
   }).then(function (response) {
-    console.log(response);
+    console.log(response)
+    console.log(response.value[0].contentUrl);
+    var recipeImage = response.value[0].contentUrl;
+
+    if(recipeImage !== undefined){
+      $(".recipeCol").append($("<img src='" + recipeImage + "'>"));
+    } else{
+      console.log(response.value[0].contentUrl);
+    }
+    // need to decide on an action for undefined
   })
 
 }
+// Bing API - ingredients  //my variables to work on
+function callBingIngredients(query) {
 
-callBing('cheeseburger');
+  console.log(query);
+
+  var q = query
+
+  queryURL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + q + "&count=10"
+
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+    beforeSend: function (request) {
+      request.setRequestHeader("Ocp-Apim-Subscription-Key", "6e2cfe4724284d8fb174832d96aec26a")
+    }
+  }).then(function (response) {
+    console.log(response)
+    console.log(response.value[0].contentUrl);
+    var recipeImage = response.value[0].contentUrl;
+
+    if(recipeImage !== undefined){
+      $(".imgContainer").append($("<img src='" + recipeImage + "'>"));
+    }
+  })
+}
+ 
+
 
 // function suggestions() {
 
@@ -116,6 +159,7 @@ callBing('cheeseburger');
 //   }
 
 // };
+
 
 
 // function amazon(lines) {
