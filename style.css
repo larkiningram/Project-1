@@ -48,3 +48,12 @@ body {
     /* border-width: 1px;
     border-style: solid; */
 }
+
+ul {
+    list-style-type: none;
+}
+
+.check {
+    float: left;
+    margin-right: 5px;
+}
