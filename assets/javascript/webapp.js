@@ -6,7 +6,7 @@ var recipeFilters = [{ param: "&health=peanut-free", check: false }, {param: "&h
 
 //function to call the Edamam api, can add more parameters to improve and specify the query
 function callEdamam(query) {
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?";
+  var queryURL = "https://api.edamam.com/search?";
 
   var q = query;
 
