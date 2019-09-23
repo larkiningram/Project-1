@@ -7,19 +7,18 @@ body {
     text-align: center;
     margin: 0 auto;
     line-height: 2;
-
     background-image: url("assets/siteBG.jpg");
 }
 
-.title, .about, .filterSearch, .row5 {
-    /* border-width: 1px;
-    border-style: solid; */
-
-    background: rgba(213, 255, 234, 0.65);
+.about, .filterSearch, .row4, .row5 {
+    background:rgba(66, 107, 105, 0.5);
 }
-
+.logo{
+    height: 75px;
+    margin: 1%;
+}
 .title{
-    height: 4rem;
+    height: 6rem;
 }
 .about {
     height: 9rem;
@@ -29,27 +28,12 @@ body {
     height: 13rem;
 }
 
-/* .buttons { 
-    height: 50px;
-} */
-
-.recipeCol, .shopCol {
+.row4 {
     height: 30rem;
+    overflow: auto;
 }
-
-
-.recipeCol {
-    float: left;
-}
-
-.shopCol {
-    float: right;
-}
-
-.recipeCol, .shopCol {
-    width: 50%;
-    /* border-width: 1px;
-    border-style: solid; */
+#search{
+    background: rgba(255, 255, 255, 0.75);
 }
 
 ul {
@@ -60,3 +44,27 @@ ul {
     float: left;
     margin-right: 2rem;
 }
+
+.row5{
+    background:rgba(66, 107, 105, 1)
+}
+
+/* --- removed --- */
+
+/* .recipeCol {
+    float: left;
+}
+
+.shopCol {
+    float: right;
+} */
+
+/* .recipeCol, .shopCol {
+    width: 50%;
+    /* border-width: 1px;
+    border-style: solid; 
+} */
+
+/* .buttons { 
+    height: 50px;
+} */
