@@ -48,6 +48,11 @@ body {
     border-style: solid; */
 }
 
+ul {
+    list-style-type: none;
+}
+
 .check {
     float: left;
+    margin-right: 5px;
 }
