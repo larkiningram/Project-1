@@ -4,6 +4,14 @@ var recipeLines = [];
 var measurement = ["/", "grams", "gram", "teaspoons", "tsp", "tbsp", "teaspoon", "tablespoons", "tablespoon", "cups", "cup", "pounds", "pound", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 var recipeFilters = [{ param: "&health=peanut-free", check: false }, {param: "&health=vegetarian", check: false}, {param: "&health=sugar-conscious", check: false}, {param: "&health=tree-nut-free", check: false}, {param: "&diet=low-fat", check: false}, {param: "&diet=high-protein", check: false}, {param: "&health=vegan", check: false}];
 
+// nut variables
+var protien = 0;
+var carbs = 0;
+var fat = 0;
+// nut recommended variables
+const recProtien = 196;
+const recCarbs = 147;
+const recFat = 65;
 
 //function to call the Edamam api, can add more parameters to improve and specify the query
 function callEdamam(query) {
@@ -41,6 +49,12 @@ function callEdamam(query) {
 
     var showIndex = Math.floor(Math.random() * (recipeNames.length - 1));
 
+    // set variables for nut values
+    var nutrients = response.hits[showIndex].recipe.totalNutrients;
+    protien = (nutrients.PROCNT.quantity).toFixed(2);
+    carbs = (nutrients.CHOCDF.quantity).toFixed(2);
+    fat = (nutrients.FAT.quantity).toFixed(2);
+
     // console.log(recipeNames[showIndex]);
     // console.log(recipeLines[showIndex]);
     var recipeName = recipeNames[showIndex];
@@ -52,6 +66,7 @@ function callEdamam(query) {
       $(".recipeCol").append(recipeLine[i] + "<br></br>");
     };
 
+    renderCharts();
     // amazon(recipeLine);
 
   })
@@ -228,7 +243,42 @@ function callBingIngredients(query) {
   })
 }
  
-
+function renderCharts() {
+  // bar chart
+  var barctx = $("#barChart");
+  var myBarChart = new Chart(barctx, {
+    type: 'bar',
+    data: {
+      labels: ['Protiens', 'Carbs', 'Fats'],
+      datasets: [{
+        data: [protien, carbs, fat],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
 
 // function suggestions() {
 
