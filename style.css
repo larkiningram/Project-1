@@ -47,3 +47,7 @@ body {
     /* border-width: 1px;
     border-style: solid; */
 }
+
+.check {
+    float: left;
+}

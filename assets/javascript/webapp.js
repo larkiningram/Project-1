@@ -2,6 +2,7 @@
 var recipeNames = [];
 var recipeLines = [];
 var measurement = ["/", "grams", "gram", "teaspoons", "tsp", "tbsp", "teaspoon", "tablespoons", "tablespoon", "cups", "cup", "pounds", "pound", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+var recipeFilters= [{param: "&health=peanut-free", check: false}, {param: "&health=vegetarian", check: false}];
 
 //function to call the Edamam api, can add more parameters to improve and specify the query
 function callEdamam(query) {
@@ -14,6 +15,16 @@ function callEdamam(query) {
   var apiKey = "app_key=59ee4eaaea79bef6ea234639a9c48a1a";
 
   queryURL = queryURL + "q=" + q + "&" + apiId + "&" + apiKey;
+
+  if(recipeFilters[0].check === true){
+    queryURL = queryURL + recipeFilters[0].param;
+  }
+
+  if(recipeFilters[1].check === true){
+    queryURL = queryURL + recipeFilters[1].param;
+  }
+
+  console.log(queryURL);
 
   $.ajax({
     url: queryURL,
@@ -46,6 +57,26 @@ function callEdamam(query) {
 
 };
 
+$(".peanut-check").on('click', function(){
+  if(recipeFilters[0].check === true){
+  recipeFilters[0].check = false;
+  console.log(recipeFilters[0].check)
+  } else {
+    recipeFilters[0].check = true;
+    console.log(recipeFilters[0].check)
+  }
+})
+
+$(".veg-check").on('click', function () {
+  if (recipeFilters[1].check === true) {
+    recipeFilters[1].check = false;
+    console.log(recipeFilters[1].check)
+  } else {
+    recipeFilters[1].check = true;
+    console.log(recipeFilters[1].check)
+  }
+})
+
 
 $("#later").on("click", function (event) {
   event.preventDefault();
@@ -55,6 +86,8 @@ $("#later").on("click", function (event) {
   var ingredient = $("#ingredient").val();
   var ingredientLink = ingredient.split(" ").join("+");
   var amazonURL = "https://www.amazon.com/s?k=" + ingredientLink;
+
+
 
   var link = ("<a href='" + amazonURL + "' target='_blank'>" + ingredient + "</a>");
 
@@ -91,7 +124,7 @@ function callBing(query) {
 
   var q = query
 
-  queryURL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + q + "&count=10"
+  queryURL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + q + " food&count=10"
 
   $.ajax({
     url: queryURL,
