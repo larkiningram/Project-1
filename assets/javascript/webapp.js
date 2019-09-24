@@ -179,17 +179,17 @@ $("#later").on("click", function (event) {
 //calls the callEdamam function with the main query as a user input, clear the previous search
 
 $("#initial").on("click", function (event) {
-  $(".name").html("");
-  $(".ingredients").html("");
-  $(".recipeCol h3").html("");
-
   var ingredient = $("#search").val();
 
   event.preventDefault();
 
-  callEdamam(ingredient);
-
-  $("#search").val("");
+  if (ingredient.length > 0) {
+    $(".name").html("");
+    $(".ingredients").html("");
+    $(".recipeCol h3").html("");
+    callEdamam(ingredient);
+    $("#search").val("");
+  }
 
 });
 
