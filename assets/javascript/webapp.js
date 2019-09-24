@@ -180,7 +180,9 @@ $("#initial").on("click", function (event) {
   
   $('#ingredientShoppingList').empty();
 
-  $('.row5').addClass('hidden');
+  if ($('.row5').css("display") !== "none") {
+    $('.row5').toggle();
+  }
 
   var ingredient = $("#search").val();
 
@@ -225,7 +227,7 @@ function callBingSearch(query) {
     var searchPage = response.webPages.webSearchUrl;
     console.log(searchPage);
     $("#ingredientShoppingList").append("<a href=" + searchPage + " target='_blank'><h4>Shop for your " + query + " with Bing!</h4></a>")
-    $('.row5').removeClass('hidden');
+    $('.row5').toggle();
   })
 }
 
