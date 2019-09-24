@@ -246,28 +246,32 @@ function callBingIngredients(query) {
 };
  
 function renderCharts() {
+  $("#barChart").empty();
   // bar chart
+  Chart.defaults.global.defaultFontColor = 'black';
+  Chart.defaults.global.defaultFontSize = 16;
   var barctx = $("#barChart");
   var myBarChart = new Chart(barctx, {
     type: 'bar',
     data: {
-      labels: ['Protiens', 'Carbs', 'Fats'],
+      labels: ['Protiens (g)', 'Carbs (g)', 'Fats (g)'],
       datasets: [{
         data: [protien, carbs, fat],
         backgroundColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)'
+          '#426B69',
+          '#222E50',
+          '#2A4849'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)'
+          '#426B69',
+          '#222E50',
+          '#2A4849'
         ],
         borderWidth: 1
       }]
     },
     options: {
+      maintainAspectRatio: false,
       legend: {
         display: false
       },
