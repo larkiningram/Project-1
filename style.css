@@ -21,7 +21,7 @@ h3{
     height: 10%;
     width: 30%;
 }
-.about, .filterSearch, .row4, .row5 {
+.about, .filterSearch, .row4, .row5, .row6 {
     background:rgba(66, 107, 105, 0.5);
 }
 .logo{
@@ -39,7 +39,7 @@ h3{
     height: 18rem;
 }
 
-.row4 {
+.row4, .row5 {
     height: 30rem;
     overflow: auto;
 }
@@ -57,10 +57,14 @@ ul {
     margin-right: 2rem;
 }
 
-.row5{
+.row6{
     background:rgba(66, 107, 105, 0.5);
     height: 30rem;
 }
 .barGraph{
     height: 82%;
+}
+
+.hidden {
+    display: none;
 }
