@@ -13,7 +13,7 @@ body {
     background-image: url("assets/siteBG.jpg");
 }
 
-.row4, .row5 {
+.row4, .row5, .row6 {
     display: none;
 }
 
