@@ -292,11 +292,13 @@ function callBingIngredients(query) {
  
 //renders charts with the nutrition information for the recipe
 function renderCharts() {
-  $("#barChart").empty();
+  $(".barGraph").empty();
   // bar chart
+  var chartCanvas = $('<canvas id="barChart" width="100" height="100"></canvas>');
+  $(".barGraph").append(chartCanvas);
   Chart.defaults.global.defaultFontColor = 'black';
   Chart.defaults.global.defaultFontSize = 16;
-  var barctx = $("#barChart");
+  var barctx = chartCanvas;
   var myBarChart = new Chart(barctx, {
     type: 'bar',
     data: {
