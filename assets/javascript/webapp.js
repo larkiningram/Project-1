@@ -26,6 +26,7 @@ function callEdamam(query) {
   var recipeLinks = [];
   var recipeLines = [];
   var recipeNames = [];
+  var recipeImages = [];
   
   //add any additional query parameters
   for(var i = 0; i < recipeFilters.length; i++){
@@ -50,6 +51,7 @@ function callEdamam(query) {
       recipeNames.push(hits[i].recipe.label);
       recipeLines.push(hits[i].recipe.ingredientLines);
       recipeLinks.push(hits[i].recipe.url);
+      recipeImages.push(hits[i].recipe.image);
     }
 
     //generate a random number which will serve as the index we choose from our arrays
@@ -65,18 +67,20 @@ function callEdamam(query) {
     var recipeName = recipeNames[showIndex];
     var recipeLine = recipeLines[showIndex];
     var recipeLink = recipeLinks[showIndex];
+    var recipeImage = recipeImages[showIndex];
 
     console.log(recipeName);
     console.log(recipeLine);
     console.log(recipeLink);
 
     //call our other API to search for a picture, then append it
-    callBing(recipeName);
+    //callBing(recipeName);
 
     //create a link out of the name of the recipe, list ingredients
     $(".name").append("<a href=" + recipeLink + " target='_blank'><strong>" + recipeName + "</strong></a><br></br>");
+    $(".name").append("<img src=" + recipeImage + " height='200px'>")
     for (i in recipeLine) {
-      $(".ingredients").append(recipeLine[i] + "<br></br>");
+      $(".ingredients").append("<span class='shop'>" +recipeLine[i] + "</span>" + "<br></br>");
     };
 
     //create charts on the recipe's nutrient information
@@ -158,30 +162,28 @@ $(".vegan-check").on('click', function () {
 })
 
 //currently not in use
-$("#later").on("click", function (event) {
+$(document).on("click", ".shop", function (event) {
   event.preventDefault();
 
-  var ingredient = $("#ingredient").val();
-  var ingredientLink = ingredient.split(" ").join("+");
-  var amazonURL = "https://www.amazon.com/s?k=" + ingredientLink;
-  callBingIngredients(ingredient);
+  var searchIngredient = $(this).text();
+  console.log(searchIngredient);
 
-
-
-  var link = ("<a href='" + amazonURL + "' target='_blank'>" + ingredient + "</a>");
-
-  $(".amazonLinks").append(link + "<br></br>");
-
-  $("#ingredient").val("");
+  callBingSearch(searchIngredient);
 });
 
 
 //calls the callEdamam function with the main query as a user input, clear the previous search
 
 $("#initial").on("click", function (event) {
+  
+  event.preventDefault();
+  
+  $('#ingredientShoppingList').empty();
+
+  $('.row5').addClass('hidden');
+
   var ingredient = $("#search").val();
 
-  event.preventDefault();
 
   if (ingredient.length > 0) {
     $(".about").toggle();
@@ -203,41 +205,60 @@ $("#clear").on("click", function () {
   $(".imgContainer").empty();
 });
 
+function callBingSearch(query) {
 
 
 
-// Bing API - recipe image  //my variables to work on
-function callBing(query) {
-
-  console.log(query);
-
-  var q = query
-
-  queryURL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + q + " food&count=10"
+  var URL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/search?q=buy+" + query + "&count=5"
 
   $.ajax({
-    url: queryURL,
+    url: URL,
     method: "GET",
     beforeSend: function (request) {
       request.setRequestHeader("Ocp-Apim-Subscription-Key", "6e2cfe4724284d8fb174832d96aec26a")
     }
-  }).then(function (response) {
-    //response is a set of images, take the first one
-    console.log(response)
-    console.log(response.value[0].contentUrl);
-    var recipeImage = response.value[0].contentUrl;
-
-    //if an image exists, append it to the recipe div
-    if (recipeImage !== undefined) {
-      $(".name").append($("<img src='" + recipeImage + "' height='200px'>"));
-    } else {
-      console.log(response.value[0].contentUrl);
-      alert("Try another query!");
-    }
-    // need to decide on an action for undefined
+  }).then(function(response){
+    console.log(response);
+    var searchPage = response.webPages.webSearchUrl;
+    console.log(searchPage);
+    $("#ingredientShoppingList").append("<a href=" + searchPage + " target='_blank'><h4>Shop for your " + query + " with Bing!</h4></a>")
+    $('.row5').removeClass('hidden');
   })
+}
 
-};
+
+// Bing API - recipe image  //my variables to work on
+// function callBing(query) {
+
+//   console.log(query);
+
+//   var q = query
+
+//   queryURL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/images/search?q=" + q + " food&count=10"
+
+//   $.ajax({
+//     url: queryURL,
+//     method: "GET",
+//     beforeSend: function (request) {
+//       request.setRequestHeader("Ocp-Apim-Subscription-Key", "6e2cfe4724284d8fb174832d96aec26a")
+//     }
+//   }).then(function (response) {
+//     //response is a set of images, take the first one
+//     console.log(response)
+//     console.log(response.value[0].contentUrl);
+//     var recipeImage = response.value[0].contentUrl;
+
+//     //if an image exists, append it to the recipe div
+//     if (recipeImage !== undefined) {
+//       $(".name").append($("<img src='" + recipeImage + "' height='200px'>"));
+//     } else {
+//       console.log(response.value[0].contentUrl);
+//       alert("Try another query!");
+//     }
+//     // need to decide on an action for undefined
+//   })
+
+// };
 
 // Bing API - ingredients  //my variables to work on
 function callBingIngredients(query) {

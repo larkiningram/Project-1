@@ -37,7 +37,7 @@ h3{
 #search:focus {
     outline: none;
 }
-.about, .filterSearch, .row4, .row5 {
+.about, .filterSearch, .row4, .row5, .row6 {
     background:rgba(66, 107, 105, 0.5);
     border-radius: 10px;
 }
@@ -67,7 +67,7 @@ h3{
     font-size: 18px;
 }
 
-.row4 {
+.row4, .row5 {
     height: 30rem;
     overflow: auto;
 }
@@ -85,13 +85,17 @@ ul {
     margin-right: 2rem;
 }
 
-.row5{
+.row6{
     background:rgba(66, 107, 105, 0.5);
     height: 30rem;
     margin-bottom: 5%;
 }
 .barGraph{
     height: 82%;
+}
+
+.hidden {
+    display: none;
 }
 a:link, a:visited {
     color: black;
