@@ -1,6 +1,4 @@
-// $(document).ready(function () {
-var recipeNames = [];
-var recipeLines = [];
+// establish extra search parameters
 var recipeFilters = [{ param: "&health=peanut-free", check: false }, {param: "&health=vegetarian", check: false}, {param: "&health=sugar-conscious", check: false}, {param: "&health=tree-nut-free", check: false}, {param: "&diet=low-fat", check: false}, {param: "&diet=high-protein", check: false}, {param: "&health=vegan", check: false}];
 
 // nut variables
@@ -24,10 +22,12 @@ function callEdamam(query) {
 
   queryURL = queryURL + "q=" + q + "&" + apiId + "&" + apiKey;
 
-  recipeLinks = [];
-  recipeLines = [];
-  recipeNames = [];
+  //create empty arrays which will be populated by the response and randomly chosen from
+  var recipeLinks = [];
+  var recipeLines = [];
+  var recipeNames = [];
   
+  //add any additional query parameters
   for(var i = 0; i < recipeFilters.length; i++){
     if(recipeFilters[i].check === true){
       queryURL = queryURL + recipeFilters[i].param;
@@ -36,13 +36,14 @@ function callEdamam(query) {
 
   console.log(queryURL);
 
+  //make the ajax call to Edamam API
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function (response) {
 
 
-
+    //push into the array variables, store names, links, and ingredients
     var hits = response.hits;
     console.log(hits);
     for (i in hits) {
@@ -51,6 +52,7 @@ function callEdamam(query) {
       recipeLinks.push(hits[i].recipe.url);
     }
 
+    //generate a random number which will serve as the index we choose from our arrays
     var showIndex = Math.floor(Math.random() * (recipeNames.length - 1));
 
 
@@ -68,19 +70,23 @@ function callEdamam(query) {
     console.log(recipeLine);
     console.log(recipeLink);
 
+    //call our other API to search for a picture, then append it
     callBing(recipeName);
 
+    //create a link out of the name of the recipe, list ingredients
     $(".name").append("<a href=" + recipeLink + "><strong>" + recipeName + "</strong></a><br></br>");
     for (i in recipeLine) {
       $(".ingredients").append(recipeLine[i] + "<br></br>");
     };
 
+    //create charts on the recipe's nutrient information
     renderCharts();
     // amazon(recipeLine);
 
   })
 };
 
+//on click functions which set extra query parameters
 $(".peanut-check").on('click', function(){
   if(recipeFilters[0].check === true){
   recipeFilters[0].check = false;
@@ -151,6 +157,7 @@ $(".vegan-check").on('click', function () {
   }
 })
 
+//currently not in use
 $("#later").on("click", function (event) {
   event.preventDefault();
 
@@ -169,7 +176,7 @@ $("#later").on("click", function (event) {
 });
 
 
-//test callEdamam function
+//calls the callEdamam function with the main query as a user input, clear the previous search
 
 $("#initial").on("click", function (event) {
   $(".name").html("");
@@ -186,6 +193,8 @@ $("#initial").on("click", function (event) {
 
 });
 
+
+//currently not in use
 $("#clear").on("click", function () {
   $(".amazonLinks").empty();
   $(".imgContainer").empty();
@@ -210,10 +219,12 @@ function callBing(query) {
       request.setRequestHeader("Ocp-Apim-Subscription-Key", "6e2cfe4724284d8fb174832d96aec26a")
     }
   }).then(function (response) {
+    //response is a set of images, take the first one
     console.log(response)
     console.log(response.value[0].contentUrl);
     var recipeImage = response.value[0].contentUrl;
 
+    //if an image exists, append it to the recipe div
     if (recipeImage !== undefined) {
       $(".name").append($("<img src='" + recipeImage + "' height='200px'>"));
     } else {
@@ -252,6 +263,7 @@ function callBingIngredients(query) {
 
 };
  
+//renders charts with the nutrition information for the recipe
 function renderCharts() {
   $("#barChart").empty();
   // bar chart
@@ -292,38 +304,3 @@ function renderCharts() {
     }
   });
 }
-
-// function suggestions() {
-
-//   for (i in foodTypes) {
-
-//     var link = $('<a href="#" class="type ' + foodTypes[i] + 'Topic">' + foodTypes[i] + '</a><br>')
-//     $("#suggestions").append(link);
-//   }
-
-// };
-
-
-
-// function amazon(lines) {
-//   $(".shopCol").html("");
-
-//   var amazonURL;
-
-//   for (i in lines) {
-//     var txt = lines[i];
-//     var ingredient = lines[i].split(" ").join("+");
-//     for (j in measurement) {
-//       ingredient = ingredient.replace(measurement[j], "");
-//     }
-//     amazonURL = "https://www.amazon.com/s?k=" + ingredient;
-
-//     // var link = txt.link(amazonURL);
-
-//     var link = ("<a href='" + amazonURL + "' target='_blank'>" + txt + "</a>");
-
-//     $(".shopCol").append(link + "<br></br>");
-//   }
-//   console.log(amazonURL);
-
-//bcf2f865ecb15e58d0d9622617c02b63f872a838
