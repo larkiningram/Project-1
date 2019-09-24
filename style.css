@@ -125,7 +125,7 @@ img {
 }
 @media (max-width: 416px){
     .filterSearch {
-        height: 18rem;
+        height: 40%;
     }
     #search{
         height: 5%;
