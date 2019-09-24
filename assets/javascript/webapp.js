@@ -24,6 +24,7 @@ function callEdamam(query) {
 
   queryURL = queryURL + "q=" + q + "&" + apiId + "&" + apiKey;
 
+  recipeLinks = [];
   recipeLines = [];
   recipeNames = [];
   
@@ -40,10 +41,14 @@ function callEdamam(query) {
     method: "GET"
   }).then(function (response) {
 
+
+
     var hits = response.hits;
+    console.log(hits);
     for (i in hits) {
       recipeNames.push(hits[i].recipe.label);
       recipeLines.push(hits[i].recipe.ingredientLines);
+      recipeLinks.push(hits[i].recipe.url);
     }
 
     var showIndex = Math.floor(Math.random() * (recipeNames.length - 1));
@@ -57,13 +62,15 @@ function callEdamam(query) {
 
     var recipeName = recipeNames[showIndex];
     var recipeLine = recipeLines[showIndex];
+    var recipeLink = recipeLinks[showIndex];
 
     console.log(recipeName);
     console.log(recipeLine);
+    console.log(recipeLink);
 
     callBing(recipeName);
 
-    $(".name").append("<strong>" + recipeName + "</strong><br></br>");
+    $(".name").append("<a href=" + recipeLink + "><strong>" + recipeName + "</strong></a><br></br>");
     for (i in recipeLine) {
       $(".ingredients").append(recipeLine[i] + "<br></br>");
     };
