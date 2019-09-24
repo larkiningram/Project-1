@@ -64,6 +64,10 @@ ul {
     margin-right: 2rem;
 }
 
+.buttons{
+    overflow: auto;
+}
+
 .row5{
     background:rgba(66, 107, 105, 0.5);
     height: 30rem;
@@ -77,4 +81,17 @@ a:link, a:visited {
 }
 img {
     border-radius: 10px;
+}
+
+@media (max-width: 410px){
+    .filterSearch {
+        height: 24rem;
+    }
+    #search{
+        height: 5%;
+        width: 50%;
+        font-size: 16px;
+        border-radius: 5px;
+        
+    }
 }
