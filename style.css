@@ -1,8 +1,11 @@
-* {
-    box-sizing: border-box;
+@font-face{
+    font-family: "MarkerFelt";
+    src: url(./MarkerFelt.ttf) format("truetype");
 }
 
 body {
+    font-family: "MarkerFelt";
+    letter-spacing: 2.5px;
     width: 90%;
     text-align: center;
     margin: 0 auto;
@@ -10,6 +13,14 @@ body {
     background-image: url("assets/siteBG.jpg");
 }
 
+h3{
+    font-size: 1.8rem;
+}
+
+#search{
+    height: 10%;
+    width: 30%;
+}
 .about, .filterSearch, .row4, .row5 {
     background:rgba(66, 107, 105, 0.5);
 }
@@ -21,17 +32,18 @@ body {
     height: 6rem;
 }
 .about {
-    height: 9rem;
+    height: 11rem;
 }
 
 .filterSearch {
-    height: 13rem;
+    height: 18rem;
 }
 
 .row4 {
     height: 30rem;
     overflow: auto;
 }
+
 #search{
     background: rgba(255, 255, 255, 0.75);
 }
@@ -46,25 +58,9 @@ ul {
 }
 
 .row5{
-    background:rgba(66, 107, 105, 1)
+    background:rgba(66, 107, 105, 0.5);
+    height: 30rem;
 }
-
-/* --- removed --- */
-
-/* .recipeCol {
-    float: left;
+.barGraph{
+    height: 82%;
 }
-
-.shopCol {
-    float: right;
-} */
-
-/* .recipeCol, .shopCol {
-    width: 50%;
-    /* border-width: 1px;
-    border-style: solid; 
-} */
-
-/* .buttons { 
-    height: 50px;
-} */
