@@ -184,6 +184,9 @@ $("#initial").on("click", function (event) {
   event.preventDefault();
 
   if (ingredient.length > 0) {
+    $(".about").toggle();
+    $(".row4").toggle();
+    $(".row5").toggle();
     $(".name").html("");
     $(".ingredients").html("");
     $(".recipeCol h3").html("");

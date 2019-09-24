@@ -13,8 +13,18 @@ body {
     background-image: url("assets/siteBG.jpg");
 }
 
+.row4, .row5 {
+    display: none;
+}
+
 h3{
     font-size: 1.8rem;
+}
+
+#initial {
+    padding: 5px;
+    text-align: center;
+    font-size: 18px;    
 }
 
 #search{
@@ -39,11 +49,22 @@ h3{
     height: 6rem;
 }
 .about {
-    height: 11rem;
+    height: 16rem;
 }
 
 .filterSearch {
-    height: 18rem;
+    height: 13rem;
+}
+
+.about h3 {
+    padding-top: 20px;
+    line-height: 70%;
+}
+
+.about p {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
 }
 
 .row4 {
