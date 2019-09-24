@@ -49,12 +49,12 @@ h3{
     height: 6rem;
 }
 .about {
-    height: 16rem;
+    height: 40%;
     overflow: auto;
 }
 
 .filterSearch {
-    height: 13rem;
+    height: 15rem;
 }
 
 .about h3 {
@@ -108,9 +108,21 @@ img {
     border-radius: 10px;
 }
 
-@media (max-width: 410px){
+@media (max-width: 480px){
     .filterSearch {
         height: 24rem;
+    }
+    #search{
+        height: 5%;
+        width: 50%;
+        font-size: 16px;
+        border-radius: 5px;
+        
+    }
+}
+@media (max-width: 416px){
+    .filterSearch {
+        height: 40%;
     }
     #search{
         height: 5%;
