@@ -74,7 +74,7 @@ function callEdamam(query) {
     callBing(recipeName);
 
     //create a link out of the name of the recipe, list ingredients
-    $(".name").append("<a href=" + recipeLink + "><strong>" + recipeName + "</strong></a><br></br>");
+    $(".name").append("<a href=" + recipeLink + " target='_blank'><strong>" + recipeName + "</strong></a><br></br>");
     for (i in recipeLine) {
       $(".ingredients").append(recipeLine[i] + "<br></br>");
     };
