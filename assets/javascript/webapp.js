@@ -136,13 +136,18 @@ $(".vegan-check").on('click', function () {
   }
 })
 
+var array = [];
 //Searches Bing for the ingredient to buy
 $(document).on("click", ".shop", function (event) {
   event.preventDefault();
-
+  
   var searchIngredient = $(this).text();
 
-  callBingSearch(searchIngredient);
+  if (array.includes(searchIngredient) === false) {
+    array.push(searchIngredient)
+    callBingSearch(searchIngredient);
+  }
+
 });
 
 
