@@ -70,7 +70,7 @@ h3{
 }
 
 .row4, .row5 {
-    height: 30rem;
+    min-height: 30rem;
     overflow: auto;
 }
 
@@ -117,7 +117,9 @@ img {
         width: 50%;
         font-size: 16px;
         border-radius: 5px;
-        
+    }
+    body{
+        width: 80%;
     }
 }
 @media (max-width: 416px){
@@ -129,6 +131,8 @@ img {
         width: 50%;
         font-size: 16px;
         border-radius: 5px;
-        
+    }
+    body{
+        width: 80%;
     }
 }

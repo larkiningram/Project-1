@@ -2,11 +2,11 @@
 var recipeFilters = [{ param: "&health=peanut-free", check: false }, { param: "&health=vegetarian", check: false }, { param: "&health=sugar-conscious", check: false }, { param: "&health=tree-nut-free", check: false }, { param: "&diet=low-fat", check: false }, { param: "&diet=high-protein", check: false }, { param: "&health=vegan", check: false }];
 
 // nut variables
-var protien = 0;
+var protein = 0;
 var carbs = 0;
 var fat = 0;
 // nut recommended variables
-const recProtien = 196;
+const recProtein = 196;
 const recCarbs = 147;
 const recFat = 65;
 
@@ -57,7 +57,7 @@ function callEdamam(query) {
 
     // set variables for nut values
     var nutrients = response.hits[showIndex].recipe.totalNutrients;
-    protien = (nutrients.PROCNT.quantity).toFixed(2);
+    protein = (nutrients.PROCNT.quantity).toFixed(2);
     carbs = (nutrients.CHOCDF.quantity).toFixed(2);
     fat = (nutrients.FAT.quantity).toFixed(2);
 
@@ -227,9 +227,9 @@ function renderCharts() {
   var myBarChart = new Chart(barctx, {
     type: 'bar',
     data: {
-      labels: ['Protiens (g)', 'Carbs (g)', 'Fats (g)'],
+      labels: ['Proteins (g)', 'Carbs (g)', 'Fats (g)'],
       datasets: [{
-        data: [protien, carbs, fat],
+        data: [protein, carbs, fat],
         backgroundColor: [
           '#426B69',
           '#222E50',
