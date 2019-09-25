@@ -103,9 +103,18 @@ ul {
 
 a:link, a:visited {
     color: black;
+    cursor: pointer;
 }
 img {
     border-radius: 10px;
+}
+
+.shop {
+    text-decoration: black underline;
+}
+
+.shop:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 480px){
