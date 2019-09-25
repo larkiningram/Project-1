@@ -13,7 +13,7 @@ body {
     background-image: url("assets/siteBG.jpg");
 }
 
-.row4, .row5, .row6 {
+.row4, .row5, .row6, .filterSearch {
     display: none;
 }
 
@@ -107,6 +107,13 @@ a:link, a:visited {
 }
 img {
     border-radius: 10px;
+}
+
+.continueButton {
+    padding: 5px;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .shop {

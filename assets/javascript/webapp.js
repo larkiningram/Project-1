@@ -163,7 +163,6 @@ $("#initial").on("click", function (event) {
 
   if (ingredient.length > 0) {
     if ($(".row4").css("display") === "none") {
-      $(".about").toggle();
       $(".row4").toggle();
       $(".row6").toggle();
     }
@@ -263,3 +262,8 @@ function renderCharts() {
     }
   });
 }
+
+$(".continueButton").on("click", function(event) {
+  $(".about").toggle();
+  $(".filterSearch").toggle();
+});
