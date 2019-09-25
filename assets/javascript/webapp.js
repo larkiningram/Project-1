@@ -1,5 +1,5 @@
 // establish extra search parameters
-var recipeFilters = [{ param: "&health=peanut-free", check: false }, {param: "&health=vegetarian", check: false}, {param: "&health=sugar-conscious", check: false}, {param: "&health=tree-nut-free", check: false}, {param: "&diet=low-fat", check: false}, {param: "&diet=high-protein", check: false}, {param: "&health=vegan", check: false}];
+var recipeFilters = [{ param: "&health=peanut-free", check: false }, { param: "&health=vegetarian", check: false }, { param: "&health=sugar-conscious", check: false }, { param: "&health=tree-nut-free", check: false }, { param: "&diet=low-fat", check: false }, { param: "&diet=high-protein", check: false }, { param: "&health=vegan", check: false }];
 
 // nut variables
 var protien = 0;
@@ -27,10 +27,10 @@ function callEdamam(query) {
   var recipeLines = [];
   var recipeNames = [];
   var recipeImages = [];
-  
+
   //add any additional query parameters
-  for(var i = 0; i < recipeFilters.length; i++){
-    if(recipeFilters[i].check === true){
+  for (var i = 0; i < recipeFilters.length; i++) {
+    if (recipeFilters[i].check === true) {
       queryURL = queryURL + recipeFilters[i].param;
     }
   }
@@ -80,21 +80,20 @@ function callEdamam(query) {
     $(".name").append("<a href=" + recipeLink + " target='_blank'><strong>" + recipeName + "</strong></a><br></br>");
     $(".name").append("<img src=" + recipeImage + " height='200px'>")
     for (i in recipeLine) {
-      $(".ingredients").append("<span class='shop'>" +recipeLine[i] + "</span>" + "<br></br>");
+      $(".ingredients").append("<span class='shop'>" + recipeLine[i] + "</span>" + "<br></br>");
     };
 
     //create charts on the recipe's nutrient information
     renderCharts();
-    // amazon(recipeLine);
 
   })
 };
 
 //on click functions which set extra query parameters
-$(".peanut-check").on('click', function(){
-  if(recipeFilters[0].check === true){
-  recipeFilters[0].check = false;
-  console.log(recipeFilters[0].check)
+$(".peanut-check").on('click', function () {
+  if (recipeFilters[0].check === true) {
+    recipeFilters[0].check = false;
+    console.log(recipeFilters[0].check)
   } else {
     recipeFilters[0].check = true;
     console.log(recipeFilters[0].check)
@@ -175,17 +174,12 @@ $(document).on("click", ".shop", function (event) {
 //calls the callEdamam function with the main query as a user input, clear the previous search
 
 $("#initial").on("click", function (event) {
-  
+
   event.preventDefault();
-  
+
   $('#ingredientShoppingList').empty();
 
-  if ($('.row5').css("display") !== "none") {
-    $('.row5').toggle();
-  }
-
   var ingredient = $("#search").val();
-
 
   if (ingredient.length > 0) {
     if ($(".row4").css("display") === "none") {
@@ -201,6 +195,10 @@ $("#initial").on("click", function (event) {
     $("#search").val("");
   }
 
+  if ($('.row4').css("display") !== "none") {
+    $('.row5').toggle();
+  }
+
 });
 
 
@@ -214,7 +212,9 @@ function callBingSearch(query) {
 
 
 
+
   var URL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/search?q=buy+" + query + "+online&count=5"
+
 
   $.ajax({
     url: URL,
@@ -222,12 +222,11 @@ function callBingSearch(query) {
     beforeSend: function (request) {
       request.setRequestHeader("Ocp-Apim-Subscription-Key", "6e2cfe4724284d8fb174832d96aec26a")
     }
-  }).then(function(response){
+  }).then(function (response) {
     console.log(response);
     var searchPage = response.webPages.webSearchUrl;
     console.log(searchPage);
     $("#ingredientShoppingList").append("<a href=" + searchPage + " target='_blank'><h4>Shop for your " + query + " with Bing!</h4></a>")
-    $('.row5').toggle();
   })
 }
 
@@ -291,7 +290,7 @@ function callBingIngredients(query) {
   })
 
 };
- 
+
 //renders charts with the nutrition information for the recipe
 function renderCharts() {
   $(".barGraph").empty();
