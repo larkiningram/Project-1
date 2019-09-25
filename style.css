@@ -103,6 +103,7 @@ ul {
 
 a:link, a:visited {
     color: black;
+    cursor: pointer;
 }
 img {
     border-radius: 10px;
@@ -112,7 +113,15 @@ img {
     padding: 5px;
     text-align: center;
     font-size: 18px;
-    margin-bottom: 1px;
+    margin-bottom: 10px;
+}
+
+.shop {
+    text-decoration: black underline;
+}
+
+.shop:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 480px){
