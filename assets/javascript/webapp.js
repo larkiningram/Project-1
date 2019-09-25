@@ -210,7 +210,11 @@ $("#clear").on("click", function () {
 
 function callBingSearch(query) {
 
-  var URL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/search?q=buy+" + query + "&count=5"
+
+
+
+  var URL = "https://centralus.api.cognitive.microsoft.com/bing/v7.0/search?q=buy+" + query + "+online&count=5"
+
 
   $.ajax({
     url: URL,
